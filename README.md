@@ -1,4 +1,4 @@
-## swim-qpid-proton v0.3.1
+## swim-qpid-proton v0.3.3
 
 ### Introduction
 `swim-qpid-proton` is an extension of [python-qpid_proton](https://pypi.org/project/python-qpid-proton/). It enables
@@ -73,8 +73,7 @@ messenger1 = Messenger(
 
 messenger2 = Messenger(
     id='topic2', 
-    message_producer=lambda context: 'topic2 message' + context,
-    interval_in_sec=5
+    message_producer=lambda context: 'topic2 message' + context
 )
 container.producer.schedule_messenger(messenger1)
 container.producer.schedule_messenger(messenger2)

@@ -85,12 +85,15 @@ class TLSConnector(Connector):
         return container.connect(self.url)
 
     def _prepare_container(self, container: Container) -> Container:
-        container.ssl.client.set_trusted_ca_db(self.cert_db)
         container.ssl.client.set_credentials(self.cert_file,
                                              self.cert_key,
                                              self.cert_password)
 
-        verification_policy = SSLDomain.VERIFY_PEER if self.cert_db else SSLDomain.ANONYMOUS_PEER
+        if self.cert_db:
+            container.ssl.client.set_trusted_ca_db(self.cert_db)
+            verification_policy = SSLDomain.VERIFY_PEER
+        else:
+            verification_policy = SSLDomain.ANONYMOUS_PEER
 
         container.ssl.client.set_peer_authentication(verification_policy)
 

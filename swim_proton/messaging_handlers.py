@@ -420,5 +420,5 @@ class Consumer(PubSubMessagingHandler):
         try:
             message_consumer(event.message)
         except Exception as e:
-            _logger.error(
+            _logger.exception(
                 f"Error while processing message {event.message} on endpoint {endpoint}: {str(e)}")
