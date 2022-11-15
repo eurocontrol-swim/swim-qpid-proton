@@ -111,6 +111,9 @@ class PubSubMessagingHandler(MessagingHandler):
         """
         self.connect(event.container)
 
+    def on_connection_closed(self, event: proton.Event) -> None:
+        self.connection = None
+
     @classmethod
     def create(cls,
                host: Optional[str] = None,
